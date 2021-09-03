@@ -12,7 +12,7 @@ function Calcular() {
         resultado = Masculino(edad);
     }
 
-    parent(document.getElementById("resultado").value = resultado)
+    document.getElementById("resultado").value = resultado;
     guardar(idenficacion, nombre, op, edad, resultado);
 }
 
@@ -24,29 +24,56 @@ function Femenino(edad) {
     var resultado = (220 - parseInt(edad)) / 10;
     return resultado;
 }
-function consultar(){
+function consultar() {
     guardar(idenficacion, nombre, op, edad, resultado);
 }
 
 function guardar(idenficacion, nombre, op, edad, resultado) {
-    var operacionew = { "idenficacion": idenficacion, "nombre": nombre, "op": op, "edad": edad, "resultado": resultado };
-    alert(idenficacion);
-    var operaciones = [] ;
-    if (JSON.parse(localStorage.getItem('dato'))!= null) {
-        operaciones = JSON.parse(localStorage.getItem('dato'));
-    }
-    operaciones.push(operacionew);
-    localStorage.setItem('dato', JSON.stringify(operaciones));
-    var pval = "";
-    operaciones.array.forEach(element => {
-        pval += "<tr>"
-             pval += "<td>" + element.idenficacion + "</td>"
-             pval += "<td>" + element.nombre + "</td>"
-             pval += "<td>" + element.op + "</td>"
-             pval += "<td>" + element.edad + "</td>"
-             pval += "<td>" + element.resultado + "</td>"
-           pval += "</tr>"
+    var Persona = {
+        "idenficacion": idenficacion,
+        "nombre": nombre,
+        "op": op,
+        "edad": edad,
+        "resultado": resultado
+    };
 
-    });
+    var Personas = [];
+    if (JSON.parse(localStorage.getItem('dato')) != null) {
+        Personas = JSON.parse(localStorage.getItem('dato'));
+    }
+    Personas.push(Persona);
+    localStorage.setItem('dato', JSON.stringify(Personas));
+    // var pval = "";
+    // Personas.array.forEach(element => {
+    //     pval += "<tr>"
+    //          pval += "<td>" + element.idenficacion + "</td>"
+    //          pval += "<td>" + element.nombre + "</td>"
+    //          pval += "<td>" + element.op + "</td>"
+    //          pval += "<td>" + element.edad + "</td>"
+    //          pval += "<td>" + element.resultado + "</td>"
+    //        pval += "</tr>"
+
+    // });
+    // document.getElementById("tdCuerpo").innerHTML = pval;
+}
+
+function mostrar() {
+    var Personas = [];
+    if (JSON.parse(localStorage.getItem('dato')) != null) {
+        Personas = JSON.parse(localStorage.getItem('dato'));
+        var pval = "";
+         Personas.forEach(element => {
+            pval += "<tr>"
+            pval += "<td>" + element.idenficacion + "</td>"
+            pval += "<td>" + element.nombre + "</td>"
+            pval += "<td>" + element.op + "</td>"
+            pval += "<td>" + element.edad + "</td>"
+            pval += "<td>" + element.resultado + "</td>"
+            pval += "</tr>"
+
+        });
+    }
+
     document.getElementById("tdCuerpo").innerHTML = pval;
+
 }
